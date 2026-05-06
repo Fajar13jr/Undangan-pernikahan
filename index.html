@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Fulan & Fulani</title>
+    
+    <!-- Libraries & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --burgundy: #8B0000;
+            --cream: #FDFDFA;
+            --dark-gold: #b38f2d;
+        }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--cream); 
+            color: #333; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .font-cursive { font-family: 'Great Vibes', cursive; }
+
+        /* Luxury Parallax Background */
+        .bg-royal {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://drive.google.com/uc?export=view&id=1eyU9_RN5gzXDtsQ94XqAFr7W1P-rMLau');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Gold Shimmer Effect */
+        .btn-gold {
+            background: linear-gradient(45deg, #8B0000, #D4AF37, #8B0000);
+            background-size: 200% auto;
+            color: white;
+            transition: 0.5s;
+            border: 1px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        .btn-gold:hover { background-position: right center; transform: scale(1.05); }
+
+        /* Ornament Frame */
+        .card-luxury {
+            background: white;
+            border: 2px solid var(--gold);
+            position: relative;
+            padding: 40px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .card-luxury::before {
+            content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid var(--gold); pointer-events: none;
+        }
+
+        /* Music Floating Button */
+        .music-player {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
+            width: 55px; height: 55px; border-radius: 50%;
+            background: var(--gold); color: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Petal Fall Animation */
+        .petal { position: absolute; pointer-events: none; animation: fall linear infinite; z-index: 50; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+
+        /* Curtain Transition */
+        #cover {
+            transition: transform 1.8s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+
+    <!-- Lingsir Wengi Audio -->
+    <audio id="bgMusic" loop>
+        <source src="https://raw.githubusercontent.com/afrizal423/statis-web/main/lingsir_wengi.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-player hidden" id="musicControl" onclick="toggleMusic()">
+        <i id="musicIcon" class="fas fa-compact-disc fa-spin text-xl"></i>
+    </div>
+
+    <!-- COVER SECTION -->
+    <div id="cover" class="fixed inset-0 z-[9999] flex items-center justify-center text-center text-white bg-royal px-6">
+        <div data-aos="zoom-in" data-aos-duration="2000">
+            <img src="https://www.transparentpng.com/download/gold-ornament/floral-gold-ornament-free-png-V4t87n.png" class="w-32 mx-auto mb-6 filter brightness-110" alt="Gold Logo">
+            <p class="mb-4 opacity-80 uppercase tracking-[0.6em] text-xs">The Royal Wedding of</p>
+            <h1 class="text-7xl md:text-9xl font-cursive text-gold mb-4 drop-shadow-lg">Fulan & Fulani</h1>
+            <div class="h-[1px] w-40 bg-gold mx-auto mb-8 opacity-50"></div>
+            <p class="text-xl md:text-2xl mb-12 tracking-[0.4em] font-light">31 MEI 2026</p>
+            <button onclick="openInvitation()" class="btn-gold px-14 py-4 rounded-full font-bold tracking-widest uppercase text-sm">
+                Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <main id="main-content" class="hidden">
+        
+        <!-- PEMBUKA (AYAT) -->
+        <section class="py-24 px-6 text-center relative overflow-hidden">
+            <div id="petal-container"></div>
+            <div class="max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="font-cursive text-5xl text-gold mb-8">Assalamu’alaikum Wr. Wb.</p>
+                <div class="card-luxury mb-12">
+                    <p class="italic text-gray-700 leading-loose text-lg px-4">
+                        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."[cite: 1]
+                    </p>
+                    <p class="font-bold text-burgundy mt-6 tracking-widest text-sm uppercase">— QS. Ar-Rum: 21[cite: 1]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFIL MEMPELAI -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-20">
+                <!-- Pria -->
+                <div class="text-center" data-aos="fade-right">
+                    <div class="relative inline-block mb-10">
+                        <div class="absolute -inset-4 border border-gold rounded-t-full rotate-3"></div>
+                        <img src="https://drive.google.com/uc?export=view&id=1akJwjhLp8jPU_z93vsjmeEmbn2j8T5ZA" class="w-72 h-96 object-cover mx-auto rounded-t-full shadow-2xl relative z-10" alt="Fulan">
+                    </div>
+                    <h2 class="text-5xl font-cursive text-burgundy mb-4">Fulan Maulana</h2>
+                    <p class="text-sm text-gray-500 uppercase tracking-widest mb-2">Putra ke-15 dari</p>
+                    <p class="font-bold text-lg">Bapak Suwiryo Diningrat & Ibu Retno Ngademiyati[cite: 1]</p>
+                </div>
+
+                <!-- Wanita -->
+                <div class="text-center" data-aos="fade-left">
+                    <div class="relative inline-block mb-10">
+                        <div class="absolute -inset-4 border border-gold rounded-t-full -rotate-3"></div>
+                        <img src="https://drive.google.com/uc?export=view&id=1NtmC46CDoKrTPfmM9NSjCH91uoXKMI7G" class="w-72 h-96 object-cover mx-auto rounded-t-full shadow-2xl relative z-10" alt="Fulani">
+                    </div>
+                    <h2 class="text-5xl font-cursive text-burgundy mb-4">Fulani</h2>
+                    <p class="text-sm text-gray-500 uppercase tracking-widest mb-2">Putri ke-20 dari</p>
+                    <p class="font-bold text-lg">Bapak Cokro Wolo & Ibu Dewi Astuti[cite: 1]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOKASI & WAKTU (MAPS VALID) -->
+        <section class="py-24 bg-royal text-white text-center">
+            <h2 class="text-5xl font-cursive text-gold mb-16" data-aos="zoom-in">Waktu & Lokasi</h2>
+            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto px-6">
+                
+                <div class="card-luxury text-gray-800" data-aos="flip-left">
+                    <h3 class="text-3xl text-burgundy mb-4">Akad Nikah</h3>
+                    <div class="h-[1px] w-20 bg-gold mx-auto mb-6"></div>
+                    <p class="font-bold text-xl mb-2">Minggu, 31 Mei 2026[cite: 1]</p>
+                    <p class="mb-6">Pukul 09:00 WIB — Selesai[cite: 1]</p>
+                </div>
+
+                <div class="card-luxury text-gray-800" data-aos="flip-right">
+                    <h3 class="text-3xl text-burgundy mb-4">Resepsi</h3>
+                    <div class="h-[1px] w-20 bg-gold mx-auto mb-6"></div>
+                    <p class="font-bold text-xl mb-2">Minggu, 31 Mei 2026[cite: 1]</p>
+                    <p class="mb-6">Pukul 11:00 WIB — Selesai[cite: 1]</p>
+                </div>
+
+            </div>
+
+            <div class="mt-16 max-w-2xl mx-auto px-6" data-aos="fade-up">
+                <div class="card-luxury text-gray-800">
+                    <i class="fas fa-church text-gold text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2">Masjid Kubah Emas (Dian Al-Mahri)</h3>
+                    <p class="text-sm opacity-70 mb-8 leading-relaxed">Jl. Raya Meruyung, Meruyung, Kec. Limo, Kota Depok, Jawa Barat[cite: 1]</p>
+                    <a href="https://maps.app.goo.gl/oY2YF3GjM68P3YmS6" target="_blank" class="btn-gold px-12 py-4 rounded-lg text-xs font-bold inline-block">
+                        <i class="fas fa-directions mr-2"></i> PETUNJUK LOKASI (GOOGLE MAPS)[cite: 1]
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- KADO DIGITAL (LOGOS) -->
+        <section class="py-24 bg-gray-50 text-center">
+            <h2 class="text-5xl text-burgundy mb-12 font-cursive" data-aos="fade-up">Amplop Digital</h2>
+            <p class="text-gray-600 mb-16 italic px-6">Doa restu Anda merupakan karunia terindah bagi kami.[cite: 1]</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
+                <!-- CIMB -->
+                <div class="card-luxury" data-aos="fade-up">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/CIMB_Niaga_logo.svg" class="h-10 mx-auto mb-8" alt="CIMB">
+                    <p class="font-black text-xl mb-1 tracking-widest">665556655678884</p>
+                    <p class="text-xs text-gray-500 uppercase mb-8">a.n Fulan Maulana[cite: 1]</p>
+                    <button onclick="copyRek('665556655678884')" class="btn-gold px-8 py-2 rounded-full text-[10px] font-bold">SALIN REKENING</button>
+                </div>
+
+                <!-- BRI -->
+                <div class="card-luxury" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_Logo.svg" class="h-10 mx-auto mb-8" alt="BRI">
+                    <p class="font-black text-xl mb-1 tracking-widest">55555678888997</p>
+                    <p class="text-xs text-gray-500 uppercase mb-8">a.n Fulan Maulana[cite: 1]</p>
+                    <button onclick="copyRek('55555678888997')" class="btn-gold px-8 py-2 rounded-full text-[10px] font-bold">SALIN REKENING</button>
+                </div>
+
+                <!-- BSI -->
+                <div class="card-luxury" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Bank_Syariah_Indonesia_logo.svg" class="h-10 mx-auto mb-8" alt="BSI">
+                    <p class="font-black text-xl mb-1 tracking-widest">66777889999</p>
+                    <p class="text-xs text-gray-500 uppercase mb-8">a.n Fulani Maulani[cite: 1]</p>
+                    <button onclick="copyRek('66777889999')" class="btn-gold px-8 py-2 rounded-full text-[10px] font-bold">SALIN REKENING</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PENUTUP -->
+        <footer class="py-32 bg-royal text-white text-center relative">
+            <div class="max-w-4xl mx-auto px-6" data-aos="zoom-in">
+                <img src="https://www.transparentpng.com/download/gold-ornament/floral-gold-ornament-free-png-V4t87n.png" class="w-24 mx-auto mb-10 filter sepia brightness-200 rotate-180" alt="ornament">
+                <p class="mb-12 leading-relaxed text-lg font-light opacity-90 italic">"Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu."</p>
+                <h2 class="text-6xl font-cursive text-gold mb-12">Fulan & Fulani</h2>
+                <div class="h-[1px] w-32 bg-gold mx-auto mb-8 opacity-40"></div>
+                <p class="text-gold font-cursive text-4xl mb-4 italic">Mugi Sakinah Mawaddah Warahmah</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+
+        const audio = document.getElementById('bgMusic');
+        const cover = document.getElementById('cover');
+        const main = document.getElementById('main-content');
+        const musicCtrl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+
+        function openInvitation() {
+            // Curtain Slide Up
+            cover.style.transform = 'translateY(-100%)';
+            document.body.classList.remove('overflow-hidden');
+            main.classList.remove('hidden');
+            musicCtrl.classList.remove('hidden');
+            
+            // Audio Play with Fade In
+            audio.volume = 0;
+            audio.play();
+            let vol = 0;
+            let fadeInterval = setInterval(() => {
+                if (vol < 0.5) { vol += 0.05; audio.volume = vol; }
+                else { clearInterval(fadeInterval); }
+            }, 100);
+
+            createPetals();
+            setTimeout(() => { cover.style.display = 'none'; }, 1800);
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicIcon.className = 'fas fa-compact-disc fa-spin text-xl';
+            } else {
+                audio.pause();
+                musicIcon.className = 'fas fa-pause-circle text-xl';
+            }
+        }
+
+        function copyRek(text) {
+            navigator.clipboard.writeText(text);
+            Swal.fire({
+                icon: 'success',
+                title: 'Tersalin',
+                text: 'Nomor rekening berhasil disalin',[cite: 1]
+                confirmButtonColor: '#D4AF37'
+            });
+        }
+
+        function createPetals() {
+            const container = document.getElementById('petal-container');
+            const icons = ['🌸', '✨', '🍂'];
+            for(let i=0; i<25; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.top = '-5vh';
+                petal.style.animationDuration = (Math.random() * 6 + 4) + 's';
+                petal.style.opacity = Math.random() * 0.7;
+                petal.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                container.appendChild(petal);
+            }
+        }
+    </script>
+</body>
+</html>
